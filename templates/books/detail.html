@@ -1,0 +1,27 @@
+{%extends 'base.html'%}
+{%block content%}
+
+<div class="row" >
+  <div class="col-md-8" style="text-align: right;">
+    <h3 class="card-title"><a href='{{book.get_absolute_url}}'>{{book.name}}</a></h3>
+      <p class="card-text">{{book.summary | linebreaks}}</p>
+  </div>
+  <div class="col-md-4">
+    {%if book.image%}
+    <img src="{{book.image.url}}" style="max-width: 100%; height: auto;" alt="post-image">
+    {%endif%}
+    <p> Author: <a href="{{book.author.get_absolute_url}}">{{book.author}}</a></p>
+    {%if not book.available%}
+    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"><button type="button" class="btn btn-primary btn-lg btn-block disabled">Not Exists</button></a>
+    {%else%}
+    <a href=' {{book.get_absolute_url}}borrow '><button type="button" class="btn btn-primary btn-lg btn-block">Borrow</button></a>
+    {%endif%}
+  </div>
+
+</div>
+
+{%endblock%}
+
+
+{%if request.user.is_authenticated%} {{book.get_absolute_url}}borrow {%else%} /accounts/login/ {%endif%} 
+

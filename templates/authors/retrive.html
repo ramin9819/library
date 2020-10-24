@@ -1,0 +1,26 @@
+{%extends 'base.html'%}
+{%block content%}
+
+<div class="row" >
+    {% for author in page_obj %}
+        <div class="col-sm-12 col-md-6 col-lg-4" style="margin-bottom: 15px;">
+            <div class="card">
+                {%if author.image%}
+                <a href="{{author.get_absolute_url}}"><img src="{{author.image.url}}" style="max-width: 100%; height: auto;" alt="post-image"></a>
+                {%endif%}
+                <div class="card-body">
+                  <h5 class="card-title"><a href='{{author.get_absolute_url}}'>{{author.fullName}}</a></h5>
+                  <p class="card-text">{{author.bio | linebreaks | truncatechars:120 }}</p>
+                  <a href='{{author.get_absolute_url}}' class="btn btn-primary">View</a>
+                </div>
+              </div>
+        </div>
+    {% endfor %}
+</div>
+
+{% include "authors/pagination.html" %}
+
+
+
+{%endblock%}
+

@@ -1,0 +1,110 @@
+
+#pre_save.connect(pre_save_post_receiver, sender=Author)
+#def create_slug(instance, new_slug=None):
+#    slug = instance.fullName.replace(' ', '-')
+#    if new_slug is not None:
+#        slug = new_slug
+#    qs = Author.objects.filter(slug = slug).order_by("-id")
+#    #print (len(qs))
+#    #print(qs)
+#    exists = qs.exists()
+#    if exists:
+#        new_slug = "%s-%s" %(slug,qs.first().id)
+#        return create_slug(instance, new_slug=new_slug)
+#    return slug
+#    #car-3-4-5-6 this kind of slug annoys me
+#    # I should repair it 
+#
+#def pre_save_post_receiver(sender, instance, *args, **kwargs):
+#    if not instance.slug:
+#        instance.slug = create_slug(instance)
+#
+
+
+def ser(request):
+    with open("data.json", mode='r', encoding='utf-8') as f:
+        data = f.read()
+        for obj in serializers.deserialize("json", data):
+            obj.save()
+    return redirect("authors:retrive")
+
+
+
+
+
+def delete(request, slug):
+    instance = Book.objects.get(slug=slug)
+    if not instance.available:
+        messages.error(request, "This book is NOT available!,\n Pleasecheck availability first.")
+        return redirect("books:detail")
+    else:
+        instance.delete()
+        messages.success(request,"Successfully Deleted")
+        return redirect("books:retrive")
+
+
+
+<div class="form-group">
+    <label for="exampleInputUsername1">Username</label>
+    <input type="text" class="form-control" required name="{{form.login.name}}">
+    {% if form.name.errors %}
+    <ul>
+    {% for error in form.name.errors %}
+        <li><strong>{{ error|escape }}</strong></li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+  </div>
+
+  <div class="form-group">
+    <label for="exampleInputEmail1">E-mail (optional)</label>
+    <input type="email" class="form-control" name="{{form.email.name}}">
+    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    {% if form.email.errors %}
+    <ul>
+    {% for error in form.email.errors %}
+        <li><strong>{{ error|escape }}</strong></li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+  </div>
+
+  <div class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    <input type="password" class="form-control" required name="{{form.password.name}}">
+    {% if form.password.errors %}
+    <ul>
+    {% for error in form.password.errors %}
+        <li><strong>{{ error|escape }}</strong></li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+  </div>
+
+  <div class="form-group">
+    <label for="exampleInputPassword1">Password (again)</label>
+    <input type="password" class="form-control" required name="{{form.password2.name}}">
+    {% if form.password2.errors %}
+    <ul>
+    {% for error in form.password2.errors %}
+        <li><strong>{{ error|escape }}</strong></li>
+    {% endfor %}
+    </ul>
+    {% endif %}
+  </div>
+
+
+
+{{ form.non_field_errors }}
+        <div class="form-group">
+          <label for="exampleInputUsername1">Username</label>
+          <input type="text" class="form-control" required name="{{form.login.name}}">
+        </div>
+        <div class="form-group">
+          <label for="exampleInputPassword1">Password</label>
+          <input type="password" class="form-control" required name="{{form.password.name}}">
+        </div>
+        <div class="form-group form-check">
+          <input type="checkbox" class="form-check-input" id="exampleCheck1">
+          <label class="form-check-label" for="exampleCheck1" name="{{form.remember.name}}">Remember Me </label>
+        </div>

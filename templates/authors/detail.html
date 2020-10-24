@@ -1,0 +1,46 @@
+{%extends 'base.html'%}
+{%block content%}
+
+<div class="row" >
+  <div class="col-md-8" style="text-align: right;">
+    <h3 class="card-title"><a href='{{author.get_absolute_url}}'>{{author.fullName}}</a></h3>
+    <p class="card-text">{{author.bio | linebreaks}}</p>
+    {%if request.user.is_staff%}
+      <a href='edit' class="btn btn-primary">Edit</a>
+    {%endif%}
+  </div>
+  <div class="col-md-4">
+    {%if author.image%}
+    <img src="{{author.image.url}}" style="max-width: 100%; height: auto;" alt="post-image">
+    {%endif%}
+  </div>
+</div>
+
+
+
+<h2>
+    Books
+</h2>
+
+<hr style="margin-bottom: 40px;">
+
+<div class="row">
+  {% for book in books %}
+    <div class="col-md-4" style="margin-bottom: 15px;">
+      <div class="card">
+          {%if book.image%}
+          <a href="{{book.get_absolute_url}}"><img src="{{book.image.url}}" style="max-width: 100%; height: auto;" alt="post-image"></a>
+          {%endif%}
+          <div class="card-body">
+          <h5 class="card-title"><a href='{{book.get_absolute_url}}'>{{book.name}}</a></h5>
+          <p class="card-text">{{book.summary | linebreaks | truncatechars:20 }}</p>
+          <a href='{{book.get_absolute_url}}' class="btn btn-primary">View</a>
+          <p> Author: <a href="{{book.author.get_absolute_url}}">{{book.author}}</a></p>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+  
+
+{%endblock%}

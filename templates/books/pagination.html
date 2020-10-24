@@ -1,0 +1,28 @@
+
+
+<nav aria-label="Page navigation example" class="fixed-bottom">
+    <ul class="pagination justify-content-center">
+        {% if page_obj.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="?page=1{% if request.GET.q %}&q={{ request.GET.q }}{%endif%}">First</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{%endif%}"> < </a>
+        </li>
+        {% endif %}
+
+        <li class="page-item disabled">
+            <a class="page-link">{{ page_obj.number }}</a></li>
+            
+        </li>
+
+        {% if page_obj.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{%endif%}"> > </a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}{% if request.GET.q %}&q={{ request.GET.q }}{%endif%}">Last</a>
+        </li>
+        {% endif %}
+    </ul>
+</nav>

@@ -1,0 +1,76 @@
+{% load static %}
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-bottom: 45px;">
+  <a class="navbar-brand" href="/"><img src="{% static 'images/naeim.png' %}" style="height: 50px;"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav d-flex flex-fill">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><button class="btn btn-outline-success">Menu</button></a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="/authors">Authors</a>
+          <a class="dropdown-item" href="/books">Books</a>
+            {%if request.user.is_staff%}
+              <a class="dropdown-item" href="/authors/create">Author Create</a>
+              <a class="dropdown-item" href="/books/create">Book Create</a>
+              <a class="dropdown-item" href="/admin">Admin</a>
+              <a class="dropdown-item" href="/deser-author">Author deserialize</a>
+              <a class="dropdown-item" href="/deser-book">Book deserialize</a>
+            {%endif%}
+        </div>
+      </li>
+      <li class="d-flex flex-fill">
+        <form  class="form-inline my-2 my-lg-0 flex-fill" method="GET" action="/books">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          <input class="form-control mr-sm-2 flex-fill" name="q" type="search"  placeholder="کتاب، نویسنده، ژانر" aria-label="Search" value="{{request.GET.q}}">
+          
+        </form>
+      </li>
+              
+    
+
+    
+      {%if request.user.is_authenticated%}
+      <li class="nav-item">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <img src="{{request.user.profile.prof.url}}" style="height: 40px; border-radius: 100%;">{{request.user.username}}</a>
+            <div class="dropdown-menu dropdown-menu-lg-right">
+              <a class="dropdown-item" href="/accounts/profile">Your Profile</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="/accounts/logout">Logout</a>
+            </div>
+      </li>
+      {%else%}
+      <li>
+        <a class="nav-link" href="/accounts/login"><button class="btn btn-outline-success">Login</button></a>
+      </li>
+      {%endif%}
+    </ul>
+  </div>
+</nav>
+
+
+  <!--
+    <img src="{% static 'images/naeim1.png' %}" style="height: 50px;">
+
+
+    <a class="nav-link " href="/accounts/logout"><img src="{{request.user.profile.prof.url}}" style="height: 40px; border-radius: 100%;">{{request.user.username}}</a>
+
+
+    <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <img src="{{request.user.profile.prof.url}}" style="height: 40px; border-radius: 100%;">{{request.user.username}}</a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="/accounts/profile">Your Profile</a>
+          <a class="dropdown-item" href="#">Favorites</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="/accounts/logout">Logout</a>
+        </div>
+
+
+  -->
+
+  

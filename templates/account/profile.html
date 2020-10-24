@@ -1,0 +1,25 @@
+{%extends 'base.html'%}
+{%block content%}
+  <div class="row">
+    <h1>{{name}}</h1>
+    <hr>
+    <a href="edit"><button class="btn btn-outline-success">Edit Profile Photo</button></a>
+  </div>
+  <div class="row" >
+    {% for book in books %}
+      <div class="col-md-4" style="margin-bottom: 15px;">
+        <div class="card">
+          {%if book.image%}
+            <img src="{{book.image.url}}" style="max-width: 100%; height: auto;" alt="post-image">
+          {%endif%}
+          <div class="card-body">
+            <h5 class="card-title"><a href='{{book.get_absolute_url}}'>{{book.name}}</a></h5>
+            <p class="card-text">{{book.summary | linebreaks | truncatechars:20 }}</p>
+            <a href='{{book.get_absolute_url}}return' class="btn btn-primary">Return</a>
+            <p> Author: <a href="{{book.author.get_absolute_url}}">{{book.author}}</a></p>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{%endblock%}

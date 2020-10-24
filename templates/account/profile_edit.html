@@ -1,0 +1,11 @@
+{%extends 'account/base.html'%}
+{%block content%}
+  <form method="POST" action="" enctype='multipart/form-data' >
+    {% csrf_token %}
+    <input type="file" name="{{form.prof.name}}" accept="image/*" id="id_prof">
+    <input type="submit" class="btn btn-primary" value="Save Changes">    
+  </form>
+  <br><br>
+  <a href="/"><button type="button" class="btn btn-primary btn-lg btn-block">Back to  Home</button></a>
+{%endblock%}
+

@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  <title> {% block head_title %}Library{% endblock %}</title>
+
+    <!--
+        
+    Can I select all <p> tags and apply a class to all them? 
+    maybe this will help me
+    
+    <script>
+        $( "p" ).addClass( "intro" );
+    </script>
+    
+    -->
+
+</head>
+<body>
+  <div class="container" >
+    <div class="d-flex  justify-content-center">
+      <div class="align-self-center" style="border: 2px solid #039BE5; padding: 70px;border-radius: 55px; ">
+        {% block content %}
+        {% endblock content %}
+      </div>
+    </div>
+
+
+        
+  </div>
+</body>
+</html>

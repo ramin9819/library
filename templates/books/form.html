@@ -1,0 +1,9 @@
+{%extends 'account/base.html'%}
+{%block content%}
+<h1>Create Book</h1><br><br>
+  <form method="POST" action="" enctype='multipart/form-data'> <!-- remove ezafe things just for Curiosity -->
+    {% csrf_token %}
+  {{form.as_p}}
+  <input type="submit" class="btn btn-primary" value={{submit_value}}>
+  </form>
+{%endblock%}
